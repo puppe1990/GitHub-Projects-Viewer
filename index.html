@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Projects</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loader {
+            border-top-color: #4f46e5; /* Tailwind's indigo color */
+            animation: spin 1s linear infinite;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-width: 4px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">GitHub Projects Viewer</h1>
+    <div class="text-center mb-8">
+        <input type="text" id="username" placeholder="Enter GitHub Username" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none">
+        <button onclick="fetchProjects()" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg">Search</button>
+    </div>
+    <div id="loader" class="flex justify-center my-3 hidden">
+        <div class="loader"></div>
+    </div>
+    <div id="projects" class="flex flex-wrap -m-4"></div>
+  </div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
