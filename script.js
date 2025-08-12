@@ -63,17 +63,32 @@ function displayRepos(repos) {
         repoStars.className = 'text-gray-600 text-sm mb-2';
         repoStars.textContent = `Stars: ${repo.stargazers_count}`;
 
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'flex flex-wrap gap-2';
+
         const repoLink = document.createElement('a');
         repoLink.className = 'inline-block bg-indigo-500 text-white text-sm font-semibold rounded-md px-4 py-2 hover:bg-indigo-600';
         repoLink.href = repo.html_url;
         repoLink.textContent = 'View Project';
         repoLink.target = '_blank';
+        buttonsDiv.appendChild(repoLink);
+
+        const rawHomepage = (repo.homepage || '').trim();
+        if (rawHomepage) {
+            const normalizedHomepage = /^(http|https):\/\//i.test(rawHomepage) ? rawHomepage : `https://${rawHomepage}`;
+            const homepageLink = document.createElement('a');
+            homepageLink.className = 'inline-block bg-gray-100 text-indigo-600 text-sm font-semibold rounded-md px-4 py-2 hover:bg-gray-200 border border-indigo-200';
+            homepageLink.href = normalizedHomepage;
+            homepageLink.textContent = 'Homepage';
+            homepageLink.target = '_blank';
+            buttonsDiv.appendChild(homepageLink);
+        }
 
         contentDiv.appendChild(repoName);
         contentDiv.appendChild(repoDescription);
         contentDiv.appendChild(repoLanguage);
         contentDiv.appendChild(repoStars);
-        contentDiv.appendChild(repoLink);
+        contentDiv.appendChild(buttonsDiv);
 
         infoDiv.appendChild(contentDiv);
         cardDiv.appendChild(infoDiv);
